@@ -1,1 +1,7 @@
 # Test_Advant
+
+[Advant. Тестовое задание на позицию Unity Developer. v2.pdf](https://github.com/user-attachments/files/20838044/Advant.Unity.Developer.v2.pdf)
+
+Из невыполненного: 
+1. Автоматическая генерация бизнесов в UI.
+2. Не до конца настроеный интерфейс (адаптация и тп), и красота этого интерфейса.
