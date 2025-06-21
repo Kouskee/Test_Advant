@@ -42,6 +42,11 @@ namespace Features.Systems
             }
         }
 
+        public void SaveGameDataDirect()
+        {
+            SaveGameData();
+        }
+
         private void SaveGameData()
         {
             var saveData = new SaveData();

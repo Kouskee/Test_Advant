@@ -23,6 +23,7 @@ namespace Core
         private EcsWorld _world;
         private EcsWorld _eventsWorld;
         private IEcsSystems _systems;
+        private SaveSystem _saveSystem;
 
         private void Start()
         {
@@ -45,7 +46,9 @@ namespace Core
             _systems.Add(new IncomeEarnedSystem());
             _systems.Add(new IncomeProgressSystem());
             _systems.Add(new UIUpdateSystem(_gameUI));
-            _systems.Add(new SaveSystem());
+
+            _saveSystem = new SaveSystem();
+            _systems.Add(_saveSystem);
 
             _systems.Init();
         }
@@ -218,6 +221,11 @@ namespace Core
             eventPool.Add(eventEntity);
         }
 
+        private void SaveGameDirect()
+        {
+            _saveSystem?.SaveGameDataDirect();
+        }
+
         private void Update()
         {
             _systems?.Run();
@@ -227,18 +235,26 @@ namespace Core
         {
             if (pauseStatus)
             {
-                SaveGame();
+                SaveGameDirect();
+            }
+        }
+
+        private void OnApplicationFocus(bool hasFocus)
+        {
+            if (!hasFocus)
+            {
+                SaveGameDirect();
             }
         }
 
         private void OnApplicationQuit()
         {
-            SaveGame();
+            SaveGameDirect();
         }
 
         private void OnDestroy()
         {
-            SaveGame();
+            SaveGameDirect();
 
             if (_systems != null)
             {
